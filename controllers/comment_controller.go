@@ -68,9 +68,9 @@ func UpdateComment(c *gin.Context) {
 func GetCommentById(c *gin.Context) {
 	db := database.GetDB()
 	Comments := models.Comment{}
-	userData := c.MustGet("usedData").(jwt.MapClaims)
+	userData := c.MustGet("userData").(jwt.MapClaims)
 	userId := uint(userData["id"].(float64))
-	commentId, _ := strconv.Atoi(c.Param("comment_id"))
+	commentId, _ := strconv.Atoi(c.Param("commentId"))
 	contentType := helpers.GetHeaderValue(c)
 	_, _ = db, contentType
 	if contentType == appJSON {
@@ -81,7 +81,7 @@ func GetCommentById(c *gin.Context) {
 	Comments.UserId = userId
 	Comments.ID = uint(commentId)
 
-	err := db.Debug().Where("user_id = ? AND comment_id = ?", Comments.UserId, commentId).Find(&Comments).Error
+	err := db.Debug().Where("user_id = ? AND id = ?", Comments.UserId, commentId).Find(&Comments).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"err":     "bad request",
@@ -115,7 +115,7 @@ func GetComments(c *gin.Context) {
 	c.JSON(http.StatusOK, Comments)
 
 }
-func DeleteComments(c *gin.Context) {
+func DeleteComment(c *gin.Context) {
 	db := database.GetDB()
 	Comments := models.Comment{}
 	userData := c.MustGet("userData").(jwt.MapClaims)

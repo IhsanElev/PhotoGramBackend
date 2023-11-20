@@ -14,7 +14,6 @@ func init() {
 		log.Fatalf("Error loading .env file")
 	}
 }
-
 var secretKey = os.Getenv("SECRET_KEY")
 
 func GenerateToken(id uint, email string, role string) string {

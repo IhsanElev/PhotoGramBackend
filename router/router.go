@@ -44,6 +44,17 @@ func StartApp() *gin.Engine {
 	{
 		commentRouter.Use(middleware.Authentication())
 		commentRouter.POST("/create", controllers.CreateComment)
+		commentRouter.GET("/comments", controllers.GetComments)
+		commentRouter.GET("/:commentId", controllers.GetCommentById)
+		commentRouter.PUT("/:commentId", middleware.CommentAuthorization(), controllers.UpdateComment)
+		commentRouter.DELETE("/:commentId", middleware.CommentAuthorization(), controllers.DeleteComment)
+	}
+	likeRouter := r.Group("/likes")
+	{
+		likeRouter.Use(middleware.Authentication())
+		likeRouter.POST("/create", controllers.CreateLike)
+		likeRouter.DELETE("/unlike", controllers.Unlike)
+
 	}
 	return r
 }

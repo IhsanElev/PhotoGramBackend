@@ -17,6 +17,7 @@ type User struct {
 	Comments     []Comment         `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"comments"`
 	Photos       []UserPhoto       `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"photos"`
 	SocialMedias []UserSocialMedia `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"socialmedias"`
+	Like         Like              `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"like"`
 }
 
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {

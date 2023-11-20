@@ -13,6 +13,7 @@ type UserPhoto struct {
 	UserID   uint
 	User     *User
 	Comments []Comment `gorm:"ForeignKey:UserPhotoID" json:"comments"`
+	Likes    []Like    `gorm:"ForeignKey:UserPhotoID" json:"likes"`
 }
 
 func (u *UserPhoto) BeforeCreate(tx *gorm.DB) (err error) {

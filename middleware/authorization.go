@@ -104,7 +104,7 @@ func CommentAuthorization() gin.HandlerFunc {
 			return
 		}
 		fmt.Println("userID: ", userId)
-		fmt.Println("SocialMedia.UserID: ", Comments.UserId)
+		fmt.Println("Comments.UserID: ", Comments.UserId)
 		if Comments.UserId != userId {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 				"error":   "Unauthorized",
