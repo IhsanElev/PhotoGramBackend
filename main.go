@@ -3,6 +3,7 @@ package main
 import (
 	"finalproject/database"
 	"finalproject/router"
+	"os"
 )
 
 // @title Tag Service API
@@ -15,5 +16,6 @@ import (
 func main() {
 	database.StartDB()
 	r := router.StartApp()
-	r.Run(":8080")
+	var PORT = os.Getenv("PORT")
+	r.Run(":" + PORT)
 }
