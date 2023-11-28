@@ -1,6 +1,6 @@
 # Simple Social Media Backend Project
 
-This is a simple social media backend project built with Golang. It includes authentication using JWT (JSON Web Tokens) and bcrypt for password hashing. The project also incorporates hooks for `beforeCreate` and `beforeUpdate` operations. The main functionalities provided by this backend are CRUD (Create, Read, Update, Delete) operations for photos, social media posts, users, and comments.
+This is a simple social media backend project built with Golang. It includes authentication using JWT (JSON Web Tokens) and bcrypt for password hashing. The project also incorporates hooks for `beforeCreate` and `beforeUpdate` operations. The main functionalities provided by this backend are CRUD (Create, Read, Update, Delete) operations for photos, social media profile, users, and comments.
 
 ## Features
 
