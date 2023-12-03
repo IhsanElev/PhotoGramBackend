@@ -27,7 +27,6 @@ func CreateLike(c *gin.Context) {
 
 	like.UserId = userID
 
-	like.UserId = userID
 	if err := db.First(&models.UserPhoto{}, like.UserPhotoID).Error; err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": "invalid like"})
 		return

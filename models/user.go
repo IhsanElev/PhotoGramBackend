@@ -14,10 +14,9 @@ type User struct {
 	Password     string            `gorm:"not null" json:"password" form:"password" binding:"required,min=6"`
 	Age          int               `gorm:"not null" json:"age" form:"age" binding:"required,gt=7"`
 	Role         string            `gorm:"default:user" json:"role,omitempty"`
-	Comments     []Comment         `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"comments"`
 	Photos       []UserPhoto       `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"photos"`
 	SocialMedias []UserSocialMedia `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"socialmedias"`
-	Like         []Like            `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"like"`
+	Like         []Like            `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;" json:"likes"`
 }
 
 func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
