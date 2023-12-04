@@ -53,8 +53,7 @@ func StartApp() *gin.Engine {
 	{
 		likeRouter.Use(middleware.Authentication())
 		likeRouter.POST("/create", controllers.CreateLike)
-		likeRouter.DELETE("/unlike", controllers.Unlike)
-
+		likeRouter.DELETE("/:likeId", middleware.LikeAuthorization(), controllers.Unlike)
 	}
 	return r
 }
