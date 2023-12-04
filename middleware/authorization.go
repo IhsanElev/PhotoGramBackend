@@ -115,3 +115,40 @@ func CommentAuthorization() gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+func LikeAuthorization() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		db := database.GetDB()
+		likeID, err := strconv.Atoi(c.Param("likeId"))
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+				"errror":  "unauthorized",
+				"message": "you are not allowed to acces this data",
+			})
+			return
+		}
+		userData := c.MustGet("userData").(jwt.MapClaims)
+		userId := uint(userData["id"].(float64))
+		Like := models.Like{}
+		err = db.Select("user_id").First(&Like, uint(likeID)).Error
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusNotFound, gin.H{
+				"error":   "Data not found",
+				"message": "data doesnot exist",
+			})
+			return
+
+		}
+		fmt.Println("userID: ", userId)
+		fmt.Println("SocialMedia.UserID: ", Like.UserId)
+		if Like.UserId != userId {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+				"error":   "Unauthorized",
+				"message": "you are not allowed to accessed this data",
+			})
+			return
+		}
+		c.Next()
+
+	}
+}
