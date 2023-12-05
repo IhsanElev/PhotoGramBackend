@@ -55,7 +55,7 @@ func UpdateComment(c *gin.Context) {
 	}
 	Comments.UserId = userId
 	Comments.ID = uint(commentId)
-	err := db.Debug().Where("user_id = ?", userId).Find(&Comments).Error
+	err := db.Debug().Where("id = ?", commentId).Model(&models.Comment{}).Where("id = ?", commentId).Updates(&Comments).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"err":     "bad request",
