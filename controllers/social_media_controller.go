@@ -98,7 +98,10 @@ func UpdateSocialMedia(c *gin.Context) {
 	}
 	SocialMedia.UserID = userID
 	SocialMedia.ID = uint(socialMediaID)
-	err := db.Debug().Where("id = ?", socialMediaID).Updates(models.UserSocialMedia{Name: SocialMedia.Name, SocialMediaURL: SocialMedia.SocialMediaURL}).Error
+
+	// Use a pointer to the struct in the Updates method
+	err := db.Debug().Where("id = ?", socialMediaID).Model(&models.UserSocialMedia{}).Where("id = ?", socialMediaID).Updates(&SocialMedia).Error
+
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"err":     "bad request",
