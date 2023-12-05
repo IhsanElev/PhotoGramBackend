@@ -65,14 +65,16 @@ func GetSocialMediaById(c *gin.Context) {
 	userData := c.MustGet("userData").(jwt.MapClaims)
 	userID := uint(userData["id"].(float64))
 	contentType := helpers.GetHeaderValue(c)
-	socialMediaId := c.Param("socialMediaId")
+	socialMediaID, _ := strconv.Atoi(c.Param("socialMediaId"))
 	_, _ = db, contentType
 	if contentType == appJSON {
 		c.ShouldBindJSON(&SocialMedia)
 	} else {
 		c.ShouldBind(&SocialMedia)
 	}
-	err := db.Debug().Where("user_id = ? AND socialmedia_id", userID, socialMediaId).Find(&SocialMedia).Error
+	SocialMedia.UserID = userID
+	SocialMedia.ID = uint(socialMediaID)
+	err := db.Debug().Where("user_id = ? AND id = ?", userID, socialMediaID).Find(&SocialMedia).Error
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"err":     "bad request",
