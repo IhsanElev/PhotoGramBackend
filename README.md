@@ -21,7 +21,7 @@ Before running the project, ensure you have the following installed:
 1. Clone the repository to your local machine:
 
 ```
-git clone https://github.com/your-username/simple-social-media-backend.git
+git clone [https://github.com/your-username/simple-social-media-backend.git](https://github.com/IhsanElev/PhotoGramBackend.git)
 ```
 
 2. Navigate to the project directory:
